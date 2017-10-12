@@ -1,6 +1,6 @@
 {
   "name": "degov/modules",
-  "description": "deGov - Modules"
+  "description": "deGov - Modules",
   "type": "drupal-module",
   "require": {
     "composer/installers": "~1.0"
