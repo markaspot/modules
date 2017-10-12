@@ -39,5 +39,17 @@ function degov_paragraph_view_reference_update_8002() {
   $view_display = $storage->load('paragraph.view_reference.preview');
   $view_display->removeComponent('field_view_reference_view');
   $view_display->save();
+  \Drupal::configFactory()
+    ->getEditable('core.entity_view_display.paragraph.view_reference.default')
+    ->set('dependencies.module', ['degov_common', 'link'])
+    ->save();
+  \Drupal::configFactory()
+    ->getEditable('core.entity_view_display.paragraph.view_reference.preview')
+    ->set('dependencies.module', ['degov_common'])
+    ->save();
   \Drupal::service('degov_config.module_updater')->applyUpdates('degov_paragraph_view_reference', '8002');
+  \Drupal::database()->delete('key_value')
+    ->condition('collection', 'system.schema')
+    ->condition('name', 'degov_views_helper')
+    ->execute();
 }
